@@ -22,7 +22,7 @@ Japanese morphological analyzer is needed to analyze Japanese text.
 And to determine accent	type of	synthesized speech, accent dictionary is needed.
 Sen, java implemented Japanese morphological analyzer, is used in this software.
 And naist-jdic is used as dictionary.
-Accent information is extracted from naist-jdic dictionary for mecab in the Open JTalk package, and was merged morphological analyzer dictionary.
+Naist-jdic, from mecab-naist-jdic directory in the Open JTalk package, is modified and used.
 
 ## How to use
 See bin/gyutan.sh(or bin/gyutan.bat on Windows).
