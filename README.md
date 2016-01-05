@@ -1,4 +1,4 @@
-# Gyutan
+y# Gyutan
 Copyright (c) 2015 Intelligent Communication Network (Ito-Nose) Laboratory Tohoku University.   
 Copyright (c) 2001-2015 Nagoya Institute of Technology Department of Computer Science.   
 All rights reserved.  
@@ -21,8 +21,9 @@ You can get HTS voice below.
 Japanese morphological analyzer is needed to analyze Japanese text.
 And to determine accent	type of	synthesized speech, accent dictionary is needed.
 Sen, java implemented Japanese morphological analyzer, is used in this software.
-And naist-jdic is used as dictionary.
-Naist-jdic, from mecab-naist-jdic directory in the Open JTalk package, is modified and used.
+And naist-jdic(ChaSen format) is used as dictionary.
+Accent information is needed to synthesize speech.
+Accent information is extracted from naist-jdic(MeCab format) in the Open JTalk package(1.08), and added to naist-jdic(ChaSen format)
 
 ## How to use
 See bin/gyutan.sh(or bin/gyutan.bat on Windows).
