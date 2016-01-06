@@ -1,4 +1,4 @@
-y# Gyutan
+# Gyutan
 Copyright (c) 2015 Intelligent Communication Network (Ito-Nose) Laboratory Tohoku University.   
 Copyright (c) 2001-2015 Nagoya Institute of Technology Department of Computer Science.   
 All rights reserved.  
