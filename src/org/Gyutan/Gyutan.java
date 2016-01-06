@@ -297,7 +297,7 @@ public class Gyutan {
 		//System.err.printf("== after set_unvoiced_vowel ==\n");
 		//njd.print();
 
-		//Gyutan_NJDLongVowelRule.set_long_vowel(njd);
+		Gyutan_NJDLongVowelRule.set_long_vowel(njd);
 		//System.err.printf("== after set_long_vowel==\n");
 		//njd.print();
 
