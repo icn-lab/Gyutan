@@ -43,7 +43,7 @@ public class gyutan {
 		System.err.printf("%s - The Japanese TTS system %s\n", progname, version);
 		   System.err.printf("\n");
 		   System.err.printf("  usage:\n");
-		   System.err.printf("       gyutan [ options ] [ infile ] \n");
+		   System.err.printf("       %s [ options ] [ infile ] \n", progname);
 		   System.err.printf(
 		           "  options:                                                                   [  def][ min-- max]\n");
 		   System.err.printf(
