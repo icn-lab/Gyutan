@@ -211,7 +211,6 @@ public class Gyutan {
 		
 		//t1 = System.nanoTime();	
 		if(jpcommon.get_label_size() > 2){
-			System.nanoTime();
 			if(engine.synthesize_from_strings(jpcommon.get_label_feature()) == true){
 				//t2 = System.nanoTime();
 				//System.err.printf("++synthesize time[us]:%f\n", (t2-t1)/1e+03);
@@ -244,7 +243,7 @@ public class Gyutan {
 	}
 	
 	public void save_label(FileOutputStream fos){
-		save_label(fos, false);
+		jpcommon.label.save_label(fos);
 	}
 	
 	public void save_label(FileOutputStream fos, Boolean withTime){
@@ -252,8 +251,7 @@ public class Gyutan {
 			if(availableEngine())
 				engine.save_label(fos);
 		else
-			if(jpcommon != null)
-				jpcommon.label.save_label(fos);
+			save_label(fos);
 	}
 	
 	public void save_riff(FileOutputStream wavf){
