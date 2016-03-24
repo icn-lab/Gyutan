@@ -1,5 +1,8 @@
 set DOWNLOAD_DIR=c:\temp
 
+REM text to synthesize
+set text=%DOWNLOAD_DIR%\test.txt
+
 set SASAKAMA_JAR=%DOWNLOAD_DIR%\Sasakama-master\Sasakama-master\jar\Sasakama.jar
 
 set GYUTAN_HOME=%DOWNLOAD_DIR%\Gyutan-master\Gyutan-master
@@ -9,19 +12,17 @@ set SEN_HOME=%GYUTAN_HOME%\sen
 set SEN_LIB=%SEN_HOME%\lib
 set SEN_JAR=%SEN_LIB%\sen.jar;%SEN_LIB%\commons-logging.jar;%SEN_LIB%\junit.jar
 
-set SIMPLE_GUI_JAR=%DOWNLOAD_DIR%\SimpleGUI-master\SimpleGUI-master\jar\SimpleGUI.jar
-
 set CLASSPATH=%SEN_JAR%;%SASAKAMA_JAR%;%GYUTAN_JAR%;
 
-set FN_VOICE=./tohoku-f01-neutral.htsvoice
+REM voice using synthesize
+set FN_VOICE=%DOWNLOAD_DIR%\tohoku-f01-neutral.htsvoice
 
-set WAVOUT=test.wav
+set WAVOUT=%DOWNLOAD_DIR%\test.wav
 
-# lab file ( without time information )
-set LAB=test.lab
+REM lab file ( without time information )
+set LAB=%DOWNLOAD_DIR%\test.lab
 
-# lab file ( with time information )
-set FLAB=test.full.lab
+REM lab file ( with time information )
+set FLAB=%DOWNLOAD_DIR%\test.full.lab
 
 java -Dorg.apache.commons.logging.simplelog.log.net.java=info -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog -classpath %CLASSPATH% gyutan -x %SEN_HOME% -m %FN_VOICE% -ow %WAVOUT% -ol %LAB% -of %FLAB% %text%
-
