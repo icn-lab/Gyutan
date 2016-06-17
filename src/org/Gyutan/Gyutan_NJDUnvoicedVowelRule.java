@@ -326,12 +326,16 @@ public class Gyutan_NJDUnvoicedVowelRule {
 				};
 
 	static int strtopcmp(String str, String pattern){
+		//char[] strat = str.toCharArray();
+		//char[] patat = pattern.toCharArray();
+		
 		for(int i = 0;;i++){
 			if(i == pattern.length())
 				return i;
 			if(i == str.length())
 				return -1;
 			if(str.charAt(i) != pattern.charAt(i))
+			//if(strat[i] != patat[i])
 				return -1;
 		}
 	}
@@ -464,7 +468,7 @@ public class Gyutan_NJDUnvoicedVowelRule {
 		mi3.atype = 0;
 		
 		for(Gyutan_NJDNode node = njd.head;node != null;node = node.next){
-			String buff = "";
+			StringBuilder buff = new StringBuilder();
 			String str = node.get_pronunciation();
 			int len;
 			if(str != null)
@@ -557,9 +561,9 @@ public class Gyutan_NJDUnvoicedVowelRule {
 				}
 				
 				/* store pronunciation */
-				buff += mi1.mora;
+				buff.append(mi1.mora);
 				if(mi1.flag == 1)
-					buff += UNVOICED_VOWEL_QUOTATION;
+					buff.append(UNVOICED_VOWEL_QUOTATION);
 				
 				/* prepare next step */
 				index += mi1.size;
@@ -576,7 +580,7 @@ public class Gyutan_NJDUnvoicedVowelRule {
 				mi3.atype = 0;
 			}
 		
-			node.set_pronunciation(buff);
+			node.set_pronunciation(buff.toString());
 		}
 	}
 

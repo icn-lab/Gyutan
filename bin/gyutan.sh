@@ -1,9 +1,11 @@
 #!/bin/sh
-text=text.txt
 
-# JAR setting
 DOWNLOAD_DIR=$HOME/workspace
 
+# text to synthesize
+text=$DOWNLOAD_DIR/text.txt
+
+# JAR setting
 SASAKAMA_JAR=$DOWNLOAD_DIR/Sasakama/jar/Sasakama.jar
 
 GYUTAN_HOME=$DOWNLOAD_DIR/Gyutan
@@ -16,19 +18,20 @@ SEN_JAR=$SEN_LIB/sen.jar:$SEN_LIB/commons-logging.jar:$SEN_LIB/junit.jar
 # set classpath
 CLASSPATH=$SEN_JAR:$SASAKAMA_JAR:$GYUTAN_JAR
 
-### htsvoice
-#FN_VOICE=./nitech_jp_atr503_m001.htsvoice
-FN_VOICE=./mei_happy.htsvoice
+# htsvoice
+FN_VOICE=$DOWNLOAD_DIR/tohoku-f01-neutral.htsvoice
 
 # Output setting
 # wav file
-WAVOUT="test.wav"
+WAVOUT=$DOWNLOAD_DIR/test.wav
 
 # lab file ( without time information )
-LAB="test.lab"
+LAB=$DOWNLOAD_DIR/test.lab
 
 # lab file ( with time information )
-FLAB="test.full.lab"
+FLAB=$DOWNLOAD_DIR/test.full.lab
+
+
 
 java -Dorg.apache.commons.logging.simplelog.log.net.java=info \
      -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog  \

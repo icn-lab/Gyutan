@@ -217,6 +217,7 @@ public class Gyutan_JPCommonLabel {
 	
 	int size;
 	String[] feature;
+	StringBuilder lineBuffer;
 	Gyutan_JPCommonLabelBreathGroup breath_head;
 	Gyutan_JPCommonLabelBreathGroup breath_tail;
 	Gyutan_JPCommonLabelAccentPhrase accent_head;
@@ -274,12 +275,16 @@ public class Gyutan_JPCommonLabel {
 	 }
 	 
 	 int strtopcmp(String str, String pattern){
+		 char[] strat = str.toCharArray();
+		 char[] patat = pattern.toCharArray();
+		 
 		 for(int i=0;;i++){
 			 if(i == pattern.length())
 				 return i;
 			 if(i == str.length())
 				 return -1;
-			 if(str.charAt(i) != pattern.charAt(i))
+			 //if(str.charAt(i) != pattern.charAt(i))
+			 if(strat[i] != patat[i])
 				 return -1;
 		 }
 	 }
@@ -471,8 +476,8 @@ public class Gyutan_JPCommonLabel {
 	 }
 	 
 	 void make_phoneme(int i, String[] phoneme_list){
-		 feature[i] = String.format("%s^%s-%s+%s=%s", phoneme_list[i], phoneme_list[i+1],
-				 										phoneme_list[i+2], phoneme_list[i+3], phoneme_list[i+4]);
+		 lineBuffer = new StringBuilder( String.format("%s^%s-%s+%s=%s", phoneme_list[i], phoneme_list[i+1],
+				 										phoneme_list[i+2], phoneme_list[i+3], phoneme_list[i+4]) );
 	 }
 	
 	 void make_A(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p, String [] phoneme_list){
@@ -488,7 +493,7 @@ public class Gyutan_JPCommonLabel {
 			 
 		 }
 		 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_B(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -509,7 +514,7 @@ public class Gyutan_JPCommonLabel {
 		 else
 			 buff = String.format("/B:%s-%s_%s", w.pos, w.ctype, w.cform);
 		 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_C(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -520,7 +525,7 @@ public class Gyutan_JPCommonLabel {
 		 else
 			 buff = String.format("/C:%s_%s+%s",  p.up.up.pos, p.up.up.ctype, p.up.up.cform);
 		 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_D(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -540,8 +545,8 @@ public class Gyutan_JPCommonLabel {
 			 buff = "/D:xx+xx_xx";
 		 else
 			 buff = String.format("/D:%s+%s_%s", w.pos, w.ctype, w.cform);
-		 
-		 feature[i] += buff;
+	
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_E(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -561,12 +566,12 @@ public class Gyutan_JPCommonLabel {
 			 buff = String.format("/E:%d_%d!%s_xx", limit(a.head.head.count_mora_in_accent_phrase(), 1, MAX_M),
 					 								limit(a.accent == 0?a.head.head.count_mora_in_accent_phrase():a.accent, 1, MAX_M),
 					 								a.emotion == null ? "0" : a.emotion);
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	
 		 if(i == 0 || i == size-1 || short_pause_flag == true || a == null)
-			 feature[i] += "-xx";
+			 lineBuffer.append("-xx");
 		 else
-			 feature[i] += String.format("-%d",  a.tail.tail.tail.next.phoneme.equals(PHONEME_SHORT_PAUSE) == true ? 0:1);
+			 lineBuffer.append( String.format("-%d",  a.tail.tail.tail.next.phoneme.equals(PHONEME_SHORT_PAUSE) == true ? 0:1) );
 	 }
 	 
 	 void make_F(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -594,7 +599,7 @@ public class Gyutan_JPCommonLabel {
 					 );
 		 }
 		 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_G(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -616,15 +621,15 @@ public class Gyutan_JPCommonLabel {
 					 limit(a.accent == 0 ? a.head.head.count_mora_in_accent_phrase() : a.accent, 1, MAX_M),
 					 a.emotion == null ? "0": a.emotion
 					);
-		 feature[i] += buff;
-		 
+		 lineBuffer.append(buff);
+				 
 		 if (i == 0 || i == size - 1 || short_pause_flag == true || a == null)
 			 buff = "_xx";
 		 else
 			 buff = String.format("_%d",
 					 PHONEME_SHORT_PAUSE.equals(a.head.head.head.prev.phoneme) == true ? 0:1);
 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_H(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -646,7 +651,7 @@ public class Gyutan_JPCommonLabel {
 					 limit(b.head.head.head.count_mora_in_breath_group(), 1, MAX_L)
 					 );
 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_I(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -677,8 +682,8 @@ public class Gyutan_JPCommonLabel {
 					 );
 		 }
 		 
-		 feature[i] += buff;
-	 }
+		 lineBuffer.append(buff);
+	}
 	 
 	
 	 void make_J(int i, Boolean short_pause_flag, Gyutan_JPCommonLabelPhoneme p){
@@ -700,15 +705,15 @@ public class Gyutan_JPCommonLabel {
 					 limit(b.head.head.head.count_mora_in_breath_group(), 1, MAX_L)
 					 );
 
-		 feature[i] += buff;
+		 lineBuffer.append(buff);
 	 }
 	 
 	 void make_K(int i){
-		 feature[i] += String.format("/K:%d+%d-%d",
+		 lineBuffer.append( String.format("/K:%d+%d-%d",
 				 				limit(breath_head.count_breath_group_in_utterance(), 1, MAX_S),
 				 				limit(accent_head.count_accent_phrase_in_utterance(), 1, MAX_M),
 				 				limit(mora_head.count_mora_in_utterance(), 1, MAX_LL)
-				 				);
+				 				) );
 	 }
 	 
 	 void make(){
@@ -756,6 +761,7 @@ public class Gyutan_JPCommonLabel {
 			 make_I(i, short_pause_flag, p);
 			 make_J(i, short_pause_flag, p);
 			 make_K(i);
+			 feature[i] = lineBuffer.toString();
 			 
 			 if(0 < i && i < size - 2)
 				 p = p.next;

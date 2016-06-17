@@ -506,12 +506,16 @@ public class Gyutan_NJDPronunciationRule {
 	static final String PRONUNCIATION_MASU_PRON = "マス";
 
 	static int strtopcmp(String str, String pattern){
+		char[] strat = str.toCharArray();
+		char[] patat = pattern.toCharArray();
+		
 		for(int i=0;;i++){
 			if(i == pattern.length())
 				return i;
 			if(i == str.length())
 				return -1;
-			if(str.charAt(i) != pattern.charAt(i))
+			//if(str.charAt(i) != pattern.charAt(i))
+			if(strat[i] != patat[i])
 				return -1;
 		}
 	}

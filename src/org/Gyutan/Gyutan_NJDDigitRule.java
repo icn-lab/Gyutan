@@ -556,12 +556,16 @@ public class Gyutan_NJDDigitRule {
 			};
 		
 	static int strtopcmp(String str, String pattern){
-			for(int i=0;;i++){
+		char[] strat = str.toCharArray();
+		char[] patat = pattern.toCharArray();
+	
+		for(int i=0;;i++){
 				if(i == pattern.length())
 					return i;
 				if(i == str.length())
 					return -1;
-				if(str.charAt(i) != pattern.charAt(i))
+		//		if(str.charAt(i) != pattern.charAt(i))
+				if(strat[i] != patat[i])
 					return -1;
 			}
 		}
@@ -586,7 +590,7 @@ public class Gyutan_NJDDigitRule {
 	static int get_digit_sequence_score(Gyutan_NJDNode start, Gyutan_NJDNode end){
 			String buff_pos_group1 = null;
 			String buff_pos_group2 = null;
-			String buff_string = null;
+			String buff_string     = null;
 			int score  = 0;
 			
 			if(start.prev != null){
@@ -810,8 +814,8 @@ public class Gyutan_NJDDigitRule {
 					int j = strtopcmp(str, digit_rule_voiced_sound_symbol_list[i]);
 					if(j >= 0){
 						String buff = digit_rule_voiced_sound_symbol_list[i + 1];
-						buff += str.substring(j);
-						node2.set_pronunciation(buff);
+						//buff += str.substring(j);
+						node2.set_pronunciation(buff+str.substring(j));
 						break;
 					}
 				}
@@ -822,8 +826,8 @@ public class Gyutan_NJDDigitRule {
 					int j = strtopcmp(str, digit_rule_semivoiced_sound_symbol_list[i]);
 					if(j >= 0){
 						String buff = digit_rule_semivoiced_sound_symbol_list[i+1];
-						buff += str.substring(j);
-						node2.set_pronunciation(buff);
+						//buff += str.substring(j);
+						node2.set_pronunciation(buff + str.substring(j));
 						break;
 					}
 				}

@@ -115,22 +115,24 @@ public class Gyutan {
 			return false;
 	}
 	
-	Token[] analysis_text(String text){
-		Token[] token = null;
+	public String[] analysis_text(String text){
+		Token[] token    = null;
+		String[] feature = null;
 		
 		if(availableSen() == false)
 			return null;
 		
 		try{
-			token = sen.analyze(replace(hankakuToZenkaku(text)));
+			token   = sen.analyze(replace(hankakuToZenkaku(text)));
+			feature = tokenToString(token);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
-		return token;
+		return feature;
 	}
 	
-	String[] tokenToString(Token[] token){		
+	public String[] tokenToString(Token[] token){		
 		String[] retString = new String[token.length];
 		for(int i=0;i < retString.length;i++){
 				/*
@@ -192,10 +194,28 @@ public class Gyutan {
 		engine.set_audio_buff_size(i);
 	}
 	
+	public String[] get_label(Boolean withTime){
+		if(withTime)
+			return engine.get_label();
+		else
+			return jpcommon.label.get_feature();
+	}
+	
 	public int synthesis(String text, FileOutputStream wavf, FileOutputStream logf){
 		if(availableSen() == false || availableEngine() == false)
 			return -1;
-		make_label(text);
+		
+		String[] feature = analysis_text(text);
+		make_label(feature);
+
+		return synthesis(wavf, logf);
+	}
+	
+	public int synthesis(String[] feature, FileOutputStream wavf, FileOutputStream logf){
+		if(availableEngine() == false)
+			return -1;
+		
+		make_label(feature);
 		return synthesis(wavf, logf);
 	}
 	
@@ -230,6 +250,10 @@ public class Gyutan {
 		return engine.synthesize_from_fn(labelFilename);
 	}
 	
+	public Boolean synthesis_from_strings(String[] label){
+		return engine.synthesize_from_strings(label);
+	}
+	
 	public void close_audio(){
 		engine.close_audio();
 	}
@@ -259,46 +283,62 @@ public class Gyutan {
 		engine.save_riff(wavf);
 	}
 	
-	public void make_label(String text){
-//		long t1, t2, t3;
+	public void make_label(String[] feature){
+		//long t1, t2, t3, t4, t5, t6, t7, t8;
 
 //		t1 = System.nanoTime();
-		Token[] token = analysis_text(text);
+		//Token[] token = analysis_text(text);
 //		t2 = System.nanoTime();
 //		System.err.printf("++morpheme_analysis time[us]:%f\n", (t2-t1)/1e+03);
 
-		if(token == null)
-			return;
+		//if(token == null)
+		//	return;
 		
-		String[] feature = tokenToString(token);
+		//String[] feature = tokenToString(token);
 		
+		//t1 = System.nanoTime();
 		njd = new Gyutan_NJD(feature);
 		//njd.print();
 		
+		//t2 = System.nanoTime();
 		Gyutan_NJDPronunciationRule.set_pronunciation(njd);
 		//System.err.printf("== after set_pronunciation ==\n");
 		//njd.print();
 
+		//t3 = System.nanoTime();
 		Gyutan_NJDDigitRule.set_digit(njd);
 		//System.err.printf("== after set_digit ==\n");
 		//njd.print();
 
+		//t4 = System.nanoTime();
 		Gyutan_NJDAccentPhraseRule.set_accent_phrase(njd);
 		//System.err.printf("== after set_accent ==\n");
 		//njd.print();
 
+		//t5 = System.nanoTime();
 		Gyutan_NJDAccentTypeRule.set_accent_type(njd);
 		//System.err.printf("== after set_accent_type ==\n");
 		//njd.print();
 
+		//t6 = System.nanoTime();
 		Gyutan_NJDUnvoicedVowelRule.set_unvoiced_vowel(njd);
 		//System.err.printf("== after set_unvoiced_vowel ==\n");
 		//njd.print();
 
+		//t7 = System.nanoTime();
 		Gyutan_NJDLongVowelRule.set_long_vowel(njd);
 		//System.err.printf("== after set_long_vowel==\n");
 		//njd.print();
-
+		//t8 = System.nanoTime();
+		/*
+		System.err.printf("NJD              :%f\n", (t2-t1)/1e+03);
+		System.err.printf("PronunciationRule:%f\n", (t3-t2)/1e+03);
+		System.err.printf("DigitRule        :%f\n", (t4-t3)/1e+03);
+		System.err.printf("AccentPhraseRule :%f\n", (t5-t4)/1e+03);
+		System.err.printf("AccentTypeRule   :%f\n", (t6-t5)/1e+03);
+		System.err.printf("UnvoicedVowelRule:%f\n", (t7-t6)/1e+03);
+		System.err.printf("LongVowelRule    :%f\n", (t8-t7)/1e+03);
+		*/
 		jpcommon = new Gyutan_JPCommon(njd);
 		jpcommon.make_label();	
 		

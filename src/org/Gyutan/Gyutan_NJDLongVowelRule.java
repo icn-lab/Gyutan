@@ -50,12 +50,16 @@ public class Gyutan_NJDLongVowelRule {
 		};
 
 	static int strtopcmp(String str, String pattern){
+		char[] strat = str.toCharArray();
+		char[] patat = pattern.toCharArray();
+		
 		for(int i=0;;i++){
 			if(i == pattern.length())
 				return i;
 			if(i == str.length())
 				return -1;
-			if(str.charAt(i) != pattern.charAt(i))
+			//if(str.charAt(i) != pattern.charAt(i))
+			if(strat[i] != patat[i])
 				return -1;
 		}
 	}
@@ -69,7 +73,7 @@ public class Gyutan_NJDLongVowelRule {
 			else
 				len = str.length();
 			
-			String buff = "";
+			StringBuilder buff = new StringBuilder();
 			int bbyte = -1;
 			for(int i=0;i < len;i+=bbyte){
 				bbyte = -1;
@@ -77,17 +81,17 @@ public class Gyutan_NJDLongVowelRule {
 				for(int j=0;j < long_vowel_table.length;j+=2){
 					bbyte = strtopcmp(str.substring(i), long_vowel_table[j]);
 					if(bbyte > 0){
-						buff += long_vowel_table[j + 1];
+						buff.append(long_vowel_table[j + 1]);
 						break;
 					}
 				}
 				if(bbyte < 0){
 					bbyte = 1;
-					buff += str.charAt(i);
+					buff.append(str.charAt(i));
 				}
 			}
 			
-			node.set_pronunciation(buff);
+			node.set_pronunciation(buff.toString());
 		}
 	}
 }

@@ -43,8 +43,8 @@ public class Gyutan_NJDNode {
 	String ctype;
 	String cform;
 	String orig;
-	String read;
-	String pronunciation;
+	StringBuilder read;
+	StringBuilder pronunciation;
 	int accent;
 	int mora_size;
 	String  chain_rule;
@@ -77,14 +77,18 @@ public class Gyutan_NJDNode {
 	
 	private void get_token_from_string(String str, int[] index, StringBuilder buff, char d){
 		buff.delete(0, buff.length());
-	
+		char[] strat = str.toCharArray();
+		
 		if(index[0] < str.length()){
-			char c = str.charAt(index[0]);
+			//char c = str.charAt(index[0]);
+			char c = strat[index[0]];
+			
 			while(c != d){
 				buff.append(c);
 				index[0]++;
 				if(index[0] < str.length())
-					c = str.charAt(index[0]);
+					//c = str.charAt(index[0]);
+					c = strat[index[0]];
 				else
 					break;
 			}
@@ -153,14 +157,14 @@ public class Gyutan_NJDNode {
 		if(str == null || str.length() == 0)
 			read = null;
 		else
-			read = str;
+			read = new StringBuilder(str);
 	}
 	
 	void set_pronunciation(String str){
 		if(str == null || str.length() == 0)
 			pronunciation = null;
 		else
-			pronunciation = str;
+			pronunciation = new StringBuilder(str);
 	}
 	
 	void set_accent(int accent){
@@ -194,18 +198,18 @@ public class Gyutan_NJDNode {
 	void add_read(String str){
 		if(str != null){
 			if(read == null)
-				read = str;
+				read = new StringBuilder(str);
 			else
-				read = read + str;
+				read.append(str);
 		}
 	}
 	
 	void add_pronunciation(String str){
 		if(str != null){
 			if(pronunciation == null)
-				pronunciation = str;
+				pronunciation = new StringBuilder(str);
 			else
-				pronunciation = pronunciation + str;
+				pronunciation.append(str);
 		}
 	}
 	
@@ -282,14 +286,14 @@ public class Gyutan_NJDNode {
 	
 	String get_read(){
 		if(read != null)
-			return read;
+			return read.toString();
 		else
 			return NODATA;
 	}
 	
 	String get_pronunciation(){
 		if(pronunciation != null)
-			return pronunciation;
+			return pronunciation.toString();
 		else
 			return NODATA;
 	}
@@ -508,8 +512,8 @@ public class Gyutan_NJDNode {
 		set_ctype(node.ctype);
 		set_cform(node.cform);
 		set_orig(node.orig);
-		set_read(node.read);
-		set_pronunciation(node.pronunciation);
+		set_read(node.read.toString());
+		set_pronunciation(node.pronunciation.toString());
 		set_accent(node.accent);
 		set_mora_size(node.mora_size);
 		set_chain_rule(node.chain_rule);

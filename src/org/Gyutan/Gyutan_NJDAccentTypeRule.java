@@ -55,12 +55,14 @@ public class Gyutan_NJDAccentTypeRule {
 	static char get_token_from_string(String string, int[] index, StringBuilder sb){
 		sb.delete(0,  sb.length());
 		char c = 0;
+		//char[] charat = string.toCharArray();
 		
 		if(index[0] == string.length()){
 			c = (char)-1;
 		}
 		else{
 			c = string.charAt(index[0]);
+			//c = charat[index[0]];
 		}
 		
 		if(index[0] < string.length()){
@@ -69,6 +71,7 @@ public class Gyutan_NJDAccentTypeRule {
 				index[0]++;
 				if(index[0] < string.length())
 					c = string.charAt(index[0]);
+					//c = charat[index[0]];
 				else
 					c = (char)-1;
 			}

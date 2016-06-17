@@ -54,11 +54,13 @@ public class Gyutan_NJD {
 	
 	private int get_token_from_string(String str, int[] index, StringBuilder buff, char d){
 		buff.delete(0,  buff.length());
-
+		char[] charat = str.toCharArray();
+		
 		if(index[0] == str.length())
 			return 0;
 		
-		char c = str.charAt(index[0]);
+		//char c = str.charAt(index[0]);
+		char c = charat[index[0]];
 		if(c == d){
 			index[0]++;
 			return 0;
@@ -68,7 +70,8 @@ public class Gyutan_NJD {
 			index[0]++;
 			if(index[0] == str.length())
 				return 0;
-			c = str.charAt(index[0]);
+			//c = str.charAt(index[0]);
+			c = charat[index[0]];
 		}
 		
 		int i;
@@ -76,7 +79,8 @@ public class Gyutan_NJD {
 			buff.append(c);
 			index[0]++;
 			if(index[0] < str.length())
-				c = str.charAt(index[0]);
+				//c = str.charAt(index[0]);
+				c = charat[index[0]];
 		}
 		if(c == d)
 			index[0]++;
@@ -134,19 +138,19 @@ public class Gyutan_NJD {
 	}
 	
 	void load(String str){
-		StringBuilder string = new StringBuilder();
-		StringBuilder pos  = new StringBuilder();
+		StringBuilder string     = new StringBuilder();
+		StringBuilder pos        = new StringBuilder();
 		StringBuilder pos_group1 = new StringBuilder();
 		StringBuilder pos_group2 = new StringBuilder();
 		StringBuilder pos_group3 = new StringBuilder();
-		StringBuilder ctype = new StringBuilder();
-		StringBuilder cform = new StringBuilder();
+		StringBuilder ctype      = new StringBuilder();
+		StringBuilder cform      = new StringBuilder();
 
-		StringBuilder orig = new StringBuilder();
-		StringBuilder read = new StringBuilder();
-		StringBuilder pron = new StringBuilder();
-		StringBuilder accent = new StringBuilder();
-		StringBuilder mora_size = new StringBuilder();
+		StringBuilder orig       = new StringBuilder();
+		StringBuilder read       = new StringBuilder();
+		StringBuilder pron       = new StringBuilder();
+		StringBuilder accent     = new StringBuilder();
+		StringBuilder mora_size  = new StringBuilder();
 		StringBuilder chain_rule = new StringBuilder();
 		StringBuilder chain_flag = new StringBuilder();
 		
@@ -156,7 +160,7 @@ public class Gyutan_NJD {
 		while(true){
 			get_token_from_string(str, index, string, ',');
 			if(get_token_from_string(str, index, pos, ',') <= 0)
-					break;
+				break;
 			if(get_token_from_string(str, index, pos_group1, ',') <= 0)
 				break;
 			if(get_token_from_string(str, index, pos_group2, ',') <= 0)
@@ -203,26 +207,26 @@ public class Gyutan_NJD {
 			return;
 		}
 		
-		StringBuilder string = new StringBuilder();
-		StringBuilder pos  = new StringBuilder();
+		StringBuilder string     = new StringBuilder();
+		StringBuilder pos        = new StringBuilder();
 		StringBuilder pos_group1 = new StringBuilder();
 		StringBuilder pos_group2 = new StringBuilder();
 		StringBuilder pos_group3 = new StringBuilder();
-		StringBuilder ctype = new StringBuilder();
-		StringBuilder cform = new StringBuilder();
+		StringBuilder ctype      = new StringBuilder();
+		StringBuilder cform      = new StringBuilder();
 
-		StringBuilder orig = new StringBuilder();
-		StringBuilder read = new StringBuilder();
-		StringBuilder pron = new StringBuilder();
-		StringBuilder accent = new StringBuilder();
-		StringBuilder mora_size = new StringBuilder();
+		StringBuilder orig       = new StringBuilder();
+		StringBuilder read       = new StringBuilder();
+		StringBuilder pron       = new StringBuilder();
+		StringBuilder accent     = new StringBuilder();
+		StringBuilder mora_size  = new StringBuilder();
 		StringBuilder chain_rule = new StringBuilder();
 		StringBuilder chain_flag = new StringBuilder();
 		
 		while(true){
 			get_token_from_file(fis, string, ',');
 			if(get_token_from_file(fis, pos, ',') <= 0)
-					break;
+				break;
 			if(get_token_from_file(fis, pos_group1, ',') <= 0)
 				break;
 			if(get_token_from_file(fis, pos_group2, ',') <= 0)
@@ -332,12 +336,12 @@ public class Gyutan_NJD {
 	}
 	
 	String sprint(String split_code){
-		String str = new String();
+		StringBuilder str = new StringBuilder();
 		
 		for(Gyutan_NJDNode node = head;node != null; node = node.next)
-			str += node.sprint(split_code);
+			str.append(node.sprint(split_code));
 		
-		return str;
+		return str.toString();
 	}
 	
 	void refresh(){
