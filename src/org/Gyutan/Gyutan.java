@@ -351,11 +351,12 @@ public class Gyutan {
 		StringBuilder sb = new StringBuilder(text);
 		for(int i=0; i < sb.length();i++){
 			char c = sb.charAt(i);
-			if((0x30 <= c && c <= 0x39) ||
-			   (0x41 <= c && c <= 0x5A) ||
-			   (0x61 <= c && c <= 0x7A)){
-				sb.setCharAt(i, (char)(c+0xFEE0));
-			}
+			if('0' <= c && c <= '9')
+				sb.setCharAt(i, (char)(c-'0'+'０'));
+			else if('A' <= c && c <= 'Z')
+				sb.setCharAt(i, (char)(c-'A'+'Ａ'));
+			else if('a' <= c && c <= 'z')
+				sb.setCharAt(i, (char)(c-'a'+'ａ'));
 		}
 		
 		return sb.toString();
