@@ -1,8 +1,8 @@
 // This software is a language translation version of "Open JTalk" developed by HTS Working Group.
 // 
-// Copyright (c) 2015 Intelligent Communication Network (Ito-Nose) Laboratory
+// Copyright (c) 2015-2016 Intelligent Communication Network (Ito-Nose) Laboratory
 // Tohoku University
-// Copyright (c) 2008-2015  Nagoya Institute of Technology
+// Copyright (c) 2008-2016  Nagoya Institute of Technology
 // Department of Computer Science
 // 
 // All rights reserved.
@@ -138,11 +138,25 @@ public class Gyutan {
 				/*
 				System.err.printf("surface:%s, terminfo:%s\n", token[i].getSurface(), token[i].getTermInfo());
 				System.err.printf("pos:%s,cform:%s,basic:%s,reading:%s,pron:%s\n", 
-						token[i].getPos(), token[i].getCform(), token[i].getBasicString(),token[i].getReading(),token[i].getReading());
+						token[i].getPos(), token[i].getCform(), token[i].getBasicString(),token[i].getReading(),token[i].getPronunciation());
 				System.err.printf("addInfo:%s\n", token[i].getAddInfo());
 				*/
 			if(token[i].getPos().equals(OOV) == false){
-				retString[i] = token[i].getSurface() + "," + token[i].getTermInfo();					//System.err.printf("%s\n", retString[i]);
+				/*
+				String[] info = token[i].getTermInfo().split(",");
+				if(info[6].equals("自分"))
+					info[8] = "ワタシ";
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(info[0]);
+				for(int j=1;j < info.length;j++){
+					sb.append(",");
+					sb.append(info[j]);
+				}
+				
+				retString[i] = token[i].getSurface() + "," + sb.toString();					//System.err.printf("%s\n", retString[i]);
+				*/
+			retString[i] = token[i].getSurface()+","+token[i].getTermInfo();
 			}
 			else{
 				retString[i] = String.format("%s,%s,*,*,*,*,*,%s,*,*,*,*,*", token[i].getSurface(),OOV,token[i].getSurface());

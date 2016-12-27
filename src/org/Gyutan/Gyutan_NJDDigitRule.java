@@ -1,8 +1,8 @@
 // This software is a language translation version of "Open JTalk" developed by HTS Working Group.
 // 
-// Copyright (c) 2015 Intelligent Communication Network (Ito-Nose) Laboratory
+// Copyright (c) 2015-2016 Intelligent Communication Network (Ito-Nose) Laboratory
 // Tohoku University
-// Copyright (c) 2008-2015  Nagoya Institute of Technology
+// Copyright (c) 2008-2016  Nagoya Institute of Technology
 // Department of Computer Science
 // 
 // All rights reserved.
@@ -36,11 +36,11 @@ public class Gyutan_NJDDigitRule {
 	static final String DIGIT_SUUSETSUZOKU="数接続";
 	static final String DIGIT_JOSUUSHI="助数詞";
 	static final String DIGIT_FUKUSHIKANOU="副詞可能";
-	static final String DIGIT_HAIHUN1 "―"     /* horizontal bar */
-	static final String DIGIT_HAIHUN2 "−"     /* minus sign */
-	static final String DIGIT_HAIHUN3 "‐"     /* hyphen */
-	static final String DIGIT_HAIHUN4 "—"     /* em dash */
-	static final String DIGIT_HAIHUN5 "－"     /* fullwidth hyphen-minus */
+	static final String DIGIT_HAIHUN1="―";     /* horizontal bar */
+	static final String DIGIT_HAIHUN2="−";    /* minus sign */
+	static final String DIGIT_HAIHUN3="‐";     /* hyphen */
+	static final String DIGIT_HAIHUN4="—";     /* em dash */
+	static final String DIGIT_HAIHUN5="－";     /* fullwidth hyphen-minus */
 	static final String DIGIT_KAKKO1="（";
 	static final String DIGIT_KAKKO2="）";
 	static final String DIGIT_BANGOU="番号";
@@ -126,20 +126,20 @@ public class Gyutan_NJDDigitRule {
 		"万,名詞,数,*,*,*,*,万,マン,マン,1/2,*",
 		"億,名詞,数,*,*,*,*,億,オク,オク,1/2,*",
 		"兆,名詞,数,*,*,*,*,兆,チョウ,チョー,1/2,C3",
-		"京,名詞,数,*,*,*,*,京,ケイ,ケイ,1/2,*",
+		"京,名詞,数,*,*,*,*,京,ケイ,ケー,1/2,*",
 		"垓,名詞,数,*,*,*,*,垓,ガイ,ガイ,1/2,*",
-		"禾予,名詞,数,*,*,*,*,禾予,ジョ,ジョ,1/1,*", /* No character in EUC-JP */
-		"穣,名詞,数,*,*,*,*,穣,ジョウ,ジョウ,1/2,*",
+		"𥝱,名詞,数,*,*,*,*,禾予,ジョ,ジョ,1/1,*", /* No character in EUC-JP */
+		"穣,名詞,数,*,*,*,*,穣,ジョウ,ジョー,1/2,*",
 		"溝,名詞,数,*,*,*,*,溝,コウ,コウ,1/2,*",
 		"澗,名詞,数,*,*,*,*,澗,カン,カン,1/2,*",
-		"正,名詞,数,*,*,*,*,正,セイ,セイ,1/2,*",
+		"正,名詞,数,*,*,*,*,正,セイ,セー,1/2,*",
 		"載,名詞,数,*,*,*,*,載,サイ,サイ,1/2,*",
 		"極,名詞,数,*,*,*,*,極,ゴク,ゴク,1/2,*",
 		"恒河沙,名詞,数,*,*,*,*,恒河沙,ゴウガシャ,ゴウガシャ,1/4,*",
-		"阿僧祇,名詞,数,*,*,*,*,阿僧祇,アソウギ,アソウギ,2/4,*",
+		"阿僧祇,名詞,数,*,*,*,*,阿僧祇,アソウギ,アソーギ,2/4,*",
 		"那由他,名詞,数,*,*,*,*,那由他,ナユタ,ナユタ,1/3,*",
 		"不可思議,名詞,数,*,*,*,*,不可思議,フカシギ,フカシギ,2/4,*",
-		"無量大数,名詞,数,*,*,*,*,無量大数,ムリョウタイスウ,ムリョータイスウ,6/7,*"
+		"無量大数,名詞,数,*,*,*,*,無量大数,ムリョウタイスウ,ムリョータイスー,6/7,*"
 	};
 
 	static final String[] digit_rule_numeral_list4 = {
@@ -539,7 +539,7 @@ public class Gyutan_NJDDigitRule {
 		"五", "五日,名詞,副詞可能,*,*,*,*,五日,イツカ,イツカ,0/3,*",
 		"六", "六日,名詞,副詞可能,*,*,*,*,六日,ムイカ,ムイカ,0/3,*",
 		"七", "七日,名詞,副詞可能,*,*,*,*,七日,ナノカ,ナノカ,0/3,*",
-		"八", "八日,名詞,副詞可能,*,*,*,*,八日,ヨウカ,ヨウカ,0/3,*",
+		"八", "八日,名詞,副詞可能,*,*,*,*,八日,ヨウカ,ヨーカ,0/3,*",
 		"九", "九日,名詞,副詞可能,*,*,*,*,九日,ココノカ,ココノカ,0/4,*",
 		"十", "十日,名詞,副詞可能,*,*,*,*,十日,トウカ,トーカ,0/3,*"
 	};
@@ -552,7 +552,7 @@ public class Gyutan_NJDDigitRule {
 		"五", "五日間,名詞,副詞可能,*,*,*,*,五日,イツカカン,イツカカン,3/5,*",
 		"六", "六日間,名詞,副詞可能,*,*,*,*,六日,ムイカカン,ムイカカン,3/5,*",
 		"七", "七日間,名詞,副詞可能,*,*,*,*,七日,ナノカカン,ナノカカン,3/5,*",
-		"八", "八日間,名詞,副詞可能,*,*,*,*,八日,ヨウカカン,ヨウカカン,3/5,*",
+		"八", "八日間,名詞,副詞可能,*,*,*,*,八日,ヨウカカン,ヨーカカン,3/5,*",
 		"九", "九日間,名詞,副詞可能,*,*,*,*,九日,ココノカカン,ココノカカン,4/6,*",
 		"十", "十日間,名詞,副詞可能,*,*,*,*,十日,トウカカン,トーカカン,3/5,*"
 	};
@@ -608,7 +608,7 @@ public class Gyutan_NJDDigitRule {
 
 			if(buff_string != null){
 				if(buff_string.equals(DIGIT_TEN1) == true || buff_string.equals(DIGIT_TEN2) == true){
-					if(start.prev.prev != null && start.prev.prev.get_pos_group().equals(DIGIT_KAZU) != true)
+					if(start.prev.prev == null || start.prev.prev.get_pos_group1().equals(DIGIT_KAZU) != true)
 						score += 0;
 					else
 						score -= 5;
