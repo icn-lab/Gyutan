@@ -340,7 +340,7 @@ public class Gyutan {
 		//njd.print();
 
 		//t7 = System.nanoTime();
-		Gyutan_NJDLongVowelRule.set_long_vowel(njd);
+		//Gyutan_NJDLongVowelRule.set_long_vowel(njd);
 		//System.err.printf("== after set_long_vowel==\n");
 		//njd.print();
 		//t8 = System.nanoTime();
